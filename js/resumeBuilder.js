@@ -1,5 +1,4 @@
 var formattedName = HTMLheaderName.replace("%data%", "Steph Jennings");
-
 var formattedRole = HTMLheaderRole.replace("%data%", "Web Developer");
 
 $("#header").prepend(formattedRole);
@@ -11,14 +10,54 @@ var bio = {
   "contacts": {
     "mobile": "022-318-2112",
     "email": "StephanieSJennings@gmail.com",
+    "twitter": "steph-j",
     "github": "steph-j",
+    "blog": "http://steph-j.github.io/",
     "location": "Auckland"
   },
-  "welcomeMessage": "Howdie Folks. Welcome to my Resume",
+  "welcomeMessage": "I love that you took the time to stop by. This site is all about me and what I can do. Drop me a line if you have something to say or I can help you in any way.",
   "skills": [
     "JavaScript", "HTML", "CSS", "Windows"
   ],
-  "bioPic": "images/bioPic.jpg"
+  "bioPic": "images/ProfilePic.jpeg"
+};
+
+bio.display = function() {
+  if (Object.keys(bio.contacts).length > 0) {
+      var formattedMobile = HTMLmobile.replace("%data%", bio.contacts.mobile);
+      $("#topContacts").append(formattedMobile);
+      var formattedEmail = HTMLemail.replace("%data%", bio.contacts.email);
+      $("#topContacts").append(formattedEmail);
+      var formattedTwitter = HTMLtwitter.replace("%data%", bio.contacts.twitter);
+      $("#topContacts").append(formattedTwitter);
+      var formattedGithub = HTMLgithub.replace("%data%", bio.contacts.github);
+      $("#topContacts").append(formattedGithub);
+      var formattedBlog = HTMLblog.replace("%data%", bio.contacts.blog);
+      $("#topContacts").append(formattedBlog);
+      var formattedLocation = HTMLlocation.replace("%data%", bio.contacts.location);
+      $("#topContacts").append(formattedLocation);
+  }
+};
+bio.display();
+
+var formattedBioPic = HTMLbioPic.replace("%data%", bio.bioPic);
+$("#header").append(formattedBioPic);
+
+var formattedWelcomeMessage = HTMLwelcomeMsg.replace("%data%", bio.welcomeMessage);
+$("#header").append(formattedWelcomeMessage);
+
+
+if (bio.skills.length > 0) {
+  $("#header").append(HTMLskillsStart);
+
+  var formattedSkill = HTMLskills.replace("%data%", bio.skills[0]);
+  $("#skills").append(formattedSkill);
+  formattedSkill = HTMLskills.replace("%data%", bio.skills[1]);
+  $("#skills").append(formattedSkill);
+  formattedSkill = HTMLskills.replace("%data%", bio.skills[2]);
+  $("#skills").append(formattedSkill);
+  formattedSkill = HTMLskills.replace("%data%", bio.skills[3]);
+  $("#skills").append(formattedSkill);
 }
 
 var education = {
@@ -44,73 +83,10 @@ var education = {
   "onlineCourses": [{
     "title": "JavaScript Basics",
     "school": "Udacity",
-    "dates": 2014,
+    "dates": 2016,
     "url": "https://www.udacity.com/"
   }]
 }
-
-var work = {
-  "jobs": [{
-    "employer": "Insight Vacations",
-    "title": "Reservations Consultant",
-    "dates": "Oct 2012 – May 2015",
-    "location": "Auckland",
-    "description": "Insight Vacations is The Travel Corporations Premium and Luxury coach touring product.  Offering tours to visit 43 European countries as well as the US, India and Nepal."
-  }, {
-    "employer": "University of London",
-    "title": "Assistant Bursur",
-    "dates": "June 2011 – Aug  2012",
-    "location": "London",
-    "description": "The University of London has 8 Intercollegiate Halls of Residence available to full time students of the University. Also available is guest accommodation both throughout the academic year and during the summer. The Halls also have conference facilities."
-  }, {
-    "employer": "Gwynn Valley Camp",
-    "title": "Administrative Assistant",
-    "dates": "Apr 2010 – Aug 2010",
-    "location": "Brevard",
-    "description": "Helped with the running of this accredited kids summer camp. They have both day sessions and sessions that run for weeks. My duties included Data-entry, phone, email and mail correspondance."
-  }]
-}
-
-var projects = {
-  "projects": [{
-    "title": "JS Racer",
-    "dates": "13 Apr 2016",
-    "description": "This is a 2 player game that uses different keys in JS to move your player across the screen to get to the finish line.",
-    "images": [
-      "https://pixabay.com/static/uploads/photo/2015/09/23/10/20/car-953357_960_720.png"
-    ]
-  }]
-}
-
-if (bio.skills.length > 0) {
-  $("#header").append(HTMLskillsStart)
-
-  var formattedSkill = HTMLskills.replace("%data%", bio.skills[0]);
-  $("#skills").append(formattedSkill);
-  formattedSkill = HTMLskills.replace("%data%", bio.skills[1]);
-  $("#skills").append(formattedSkill);
-  formattedSkill = HTMLskills.replace("%data%", bio.skills[2]);
-  $("#skills").append(formattedSkill);
-  formattedSkill = HTMLskills.replace("%data%", bio.skills[3]);
-  $("#skills").append(formattedSkill);
-};
-
-var displayWork = function() {
-  for (job in work.jobs) {
-    $("#workExperience").append(HTMLworkStart);
-    var formattedEmployer = HTMLworkEmployer.replace("%data%", work.jobs[job].employer);
-    var formattedTitle = HTMLworkTitle.replace("%data%", work.jobs[job].title);
-    var formattedEmployerTitle = formattedEmployer + formattedTitle;
-    $(".work-entry:last").append(formattedEmployerTitle);
-    var formattedDates = HTMLworkDates.replace("%data%", work.jobs[job].dates);
-    $(".work-entry:last").append(formattedDates);
-    var formattedLocation = HTMLworkLocation.replace("%data%", work.jobs[job].location);
-    $(".work-entry:last").append(formattedLocation);
-    var formattedDescription = HTMLworkDescription.replace("%data%", work.jobs[job].description);
-    $(".work-entry:last").append(formattedDescription);
-  }
-};
-displayWork()
 
 education.display = function() {
   for (school in education.schools) {
@@ -146,6 +122,57 @@ education.display = function() {
   }
 };
 education.display();
+
+var work = {
+  "jobs": [{
+    "employer": "Insight Vacations",
+    "title": "Reservations Consultant",
+    "dates": "Oct 2012 – May 2015",
+    "location": "Auckland",
+    "description": "Insight Vacations is The Travel Corporations Premium and Luxury coach touring product.  Offering tours to visit 43 European countries as well as the US, India and Nepal."
+  }, {
+    "employer": "University of London",
+    "title": "Assistant Bursur",
+    "dates": "June 2011 – Aug  2012",
+    "location": "London",
+    "description": "The University of London has 8 Intercollegiate Halls of Residence available to full time students of the University. Also available is guest accommodation both throughout the academic year and during the summer. The Halls also have conference facilities."
+  }, {
+    "employer": "Gwynn Valley Camp",
+    "title": "Administrative Assistant",
+    "dates": "Apr 2010 – Aug 2010",
+    "location": "Brevard",
+    "description": "Helped with the running of this accredited kids summer camp. They have both day sessions and sessions that run for weeks. My duties included Data-entry, phone, email and mail correspondance."
+  }]
+}
+
+var displayWork = function() {
+  for (job in work.jobs) {
+    $("#workExperience").append(HTMLworkStart);
+    var formattedEmployer = HTMLworkEmployer.replace("%data%", work.jobs[job].employer);
+    var formattedTitle = HTMLworkTitle.replace("%data%", work.jobs[job].title);
+    var formattedEmployerTitle = formattedEmployer + formattedTitle;
+    $(".work-entry:last").append(formattedEmployerTitle);
+    var formattedDates = HTMLworkDates.replace("%data%", work.jobs[job].dates);
+    $(".work-entry:last").append(formattedDates);
+    var formattedLocation = HTMLworkLocation.replace("%data%", work.jobs[job].location);
+    $(".work-entry:last").append(formattedLocation);
+    var formattedDescription = HTMLworkDescription.replace("%data%", work.jobs[job].description);
+    $(".work-entry:last").append(formattedDescription);
+  }
+};
+displayWork()
+
+
+var projects = {
+  "projects": [{
+    "title": "JS Racer",
+    "dates": "13 Apr 2016",
+    "description": "This is a 2 player game that uses different keys in JS to move your player across the screen to get to the finish line.",
+    "images": [
+      "https://pixabay.com/static/uploads/photo/2015/09/23/10/20/car-953357_960_720.png"
+    ]
+  }]
+}
 
 projects.display = function() {
   for (project in projects.projects) {
@@ -187,5 +214,5 @@ function inName(name) {
   return name[0] + " " + name[1];
 }
 
-
 $("#mapDiv").append(googleMap);
+
